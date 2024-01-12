@@ -1,5 +1,16 @@
 <?php
 include __DIR__.'/functions.php';
+$success = NULL;
+$email = '';
+if (!empty($_GET['email'])) {
+    $email = $_GET['email'];
+    if (checkEmail($email)) {
+        $success = true;
+    }else {
+        $success= false;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +28,7 @@ include __DIR__.'/functions.php';
     <div class="container">
         <form action="index.php" method="GET" class="py-5">
             <label for="email" class="form-label">Inserisci la tua email</label>
-            <input class="form-control mt-2 mb-3" type="email" id="email" name="email">
+            <input class="form-control mt-2 mb-3" type="email" id="email" name="email" value="<?php echo $email;?>">
 
             <?php if ($success) : ?>
                 <div class="alert alert-success" role="alert">
@@ -32,7 +43,7 @@ include __DIR__.'/functions.php';
             <button class="btn btn-primary btn-sm" type="submit">Invia</button>
         </form>
     </div>
-
+    
 </body>
 
 </html>
